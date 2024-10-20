@@ -1,0 +1,39 @@
+services:
+  bot:
+    container_name: bot
+    image: fissure-bot:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    command: sh -c "alembic upgrade head && python -m app.main"
+    tty: true
+    depends_on:
+      - db
+    networks:
+      - internal-network
+  db:
+    container_name: fissure-db
+    image: postgres:alpine3.19
+    ports:
+      - "5434:5434"
+    command: -p 5434
+    restart: on-failure
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - internal-network
+
+volumes:
+  db-data:
+
+networks:
+  internal-network:
+    driver: bridge
