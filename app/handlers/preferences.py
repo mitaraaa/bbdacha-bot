@@ -83,6 +83,7 @@ async def enable_notifications(
 
     if callback_data.from_start:
         await enable_notifications_message(callback.message)
+        await send_tournament_selection_message(callback.message)
     else:
         await send_preferences_message(
             callback.message, callback.from_user.id, update=True
@@ -99,6 +100,7 @@ async def disable_notifications(
 
     if callback_data.from_start:
         await disable_notifications_message(callback.message)
+        await send_tournament_selection_message(callback.message)
     else:
         await send_preferences_message(
             callback.message, callback.from_user.id, update=True
