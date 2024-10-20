@@ -1,4 +1,4 @@
-from aiogram.types import Message
+from aiogram.types import LinkPreviewOptions, Message
 from emoji import emojize
 
 from app.models.match import Match
@@ -38,7 +38,9 @@ async def send_matches(message: Message, matches: list[Match] | None):
     text = f":tear-off_calendar: Сегодняшние матчи:\n{matches_list}"
 
     await message.answer(emojize(text))
-    await message.answer(build_links())
+    await message.answer(
+        build_links(), link_preview_options=LinkPreviewOptions(is_disabled=True)
+    )
 
 
 async def send_upcoming_matches(message: Message, matches: list[Match] | None):
@@ -54,7 +56,9 @@ async def send_upcoming_matches(message: Message, matches: list[Match] | None):
     text = f":tear-off_calendar: Расписание на ближайшие 3 часа:\n{matches_list}"
 
     await message.answer(emojize(text))
-    await message.answer(build_links())
+    await message.answer(
+        build_links(), link_preview_options=LinkPreviewOptions(is_disabled=True)
+    )
 
 
 async def send_tommorow_matches(message: Message, matches: list[Match] | None):
@@ -66,4 +70,6 @@ async def send_tommorow_matches(message: Message, matches: list[Match] | None):
     text = f":tear-off_calendar: Матчи на завтра:\n{matches_list}"
 
     await message.answer(emojize(text))
-    await message.answer(build_links())
+    await message.answer(
+        build_links(), link_preview_options=LinkPreviewOptions(is_disabled=True)
+    )

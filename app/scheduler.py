@@ -1,4 +1,5 @@
 from aiogram import Bot
+from aiogram.types import LinkPreviewOptions
 from emoji import emojize
 
 from app.messages.matches import build_links, build_string
@@ -22,7 +23,11 @@ async def scheduled_job(bot: Bot):
         text = f":tear-off_calendar: Сегодняшние матчи:\n{matches_list}"
 
         await bot.send_message(user.id, emojize(text))
-        await bot.send_message(user.id, await build_links())
+        await bot.send_message(
+            user.id,
+            build_links(),
+            link_preview_options=LinkPreviewOptions(is_disabled=True),
+        )
 
 
 async def update_all_matches():
