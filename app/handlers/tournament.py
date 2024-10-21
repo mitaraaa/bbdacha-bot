@@ -258,7 +258,7 @@ async def update_tournament_table_url(
 
     await callback.answer()
     await callback.message.answer(
-        "Введите новую ссылку на таблицу \\(должна начинаться с http:// или https://\\) или /cancel для отмены:"
+        "Введите новую ссылку на таблицу \\(должна начинаться с http:// или https://\\) или '-' чтобы удалить ссылку. Введите /cancel для отмены:"
     )
 
 
@@ -266,12 +266,15 @@ async def update_tournament_table_url(
 async def process_tournament_table_url(message: Message, state: FSMContext):
     url = message.text
 
-    if not is_url(url):
+    if not is_url(url) and not url == "-":
         await message.answer("Введите корректную ссылку на таблицу")
         return
 
     data = await state.get_data()
     await state.clear()
+
+    if url == "-":
+        url = None
 
     await tournaments.update_tournament_table_url(data["tournament_id"], url)
 
