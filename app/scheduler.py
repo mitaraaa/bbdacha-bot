@@ -19,7 +19,7 @@ async def scheduled_job(bot: Bot):
         if not matches:
             continue
 
-        matches_list = "\n".join([await build_string(match) for match in matches])
+        matches_list = "\n".join([build_string(match) for match in matches])
         text = f":tear-off_calendar: Сегодняшние матчи:\n{matches_list}"
 
         await bot.send_message(user.id, emojize(text))
