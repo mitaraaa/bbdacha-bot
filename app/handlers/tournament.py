@@ -258,7 +258,7 @@ async def update_tournament_table_url(
 
     await callback.answer()
     await callback.message.answer(
-        "Введите новую ссылку на таблицу \\(должна начинаться с http:// или https://\\) или '-' чтобы удалить ссылку. Введите /cancel для отмены:"
+        'Введите новую ссылку на таблицу \\(должна начинаться с http:// или https://\\) или "\\-" чтобы удалить ссылку\\. Введите /cancel для отмены:'
     )
 
 
