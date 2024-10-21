@@ -48,7 +48,7 @@ async def send_tournament_creation_message(message: Message, state: FSMContext):
         ":game_die: Создание нового турнира\n\n"
         f"Название турнира: {escape_markdown(data.get('name', 'введите название' if current == CreateTournament.name else 'не указано'))}\n"
         f"Год: {escape_markdown(data.get('year', 'введите год' if current == CreateTournament.year else 'не указан'))}\n"
-        f"Ссылка на таблицу: {escape_markdown(data.get('table_url', 'введите ссылку или \"-\" чтобы оставить пустым' if current == CreateTournament.table_url else 'не указана'))}"
+        f"Ссылка на таблицу: {escape_markdown(data.get('table_url', 'введите ссылку или прочерк чтобы оставить пустым' if current == CreateTournament.table_url else 'не указана'))}"
     )
 
     markup = back_button()
